@@ -3,6 +3,7 @@ import FormInput from './FormInput';
 import { validateEmail } from '../../../utils/validation';
 import { useAppDispatch } from '../../../app/hooks';
 import { setAuthenticated, setUserRole, setUsernameValue } from '../../roles/roleSlice';
+import { Loader2 } from 'lucide-react';
 
 const SignInForm = ({ onSuccess, role = 'viewer' }) => {
   const dispatch = useAppDispatch();
@@ -170,12 +171,13 @@ const SignInForm = ({ onSuccess, role = 'viewer' }) => {
       <button
         type="submit"
         disabled={isSubmitting}
+        aria-busy={isSubmitting ? 'true' : 'false'}
         className="w-full py-2.5 px-4 rounded-md bg-primary text-primary-foreground font-medium transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {isSubmitting ? (
           <>
-            <span className="animate-spin">Loading</span>
-            Signing In...
+            <Loader2 className="w-4 h-4 animate-spin" />
+            Signing in...
           </>
         ) : (
           'Sign In'
